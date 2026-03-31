@@ -1,0 +1,161 @@
+.main-layout{
+    display:grid;
+    grid-template-columns: 2.5fr 1fr;
+    gap:30px;
+    padding:30px;
+}
+
+/* LEFT STOCK AREA */
+.stock-area{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+}
+
+.stock-header{
+    margin-bottom:20px;
+}
+
+.stock-price{
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+.price{
+    font-size:28px;
+    font-weight:700;
+}
+
+.loss{
+    color:#ff4d4f;
+    font-weight:600;
+}
+
+.day{
+    color:#888;
+}
+
+#stockChart{
+    width:100%;
+    height:420px;
+}
+
+/* BOTTOM */
+.bottom-controls{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:20px;
+}
+
+.exchange{
+    background:#f3f4f6;
+    padding:8px 16px;
+    border-radius:20px;
+    font-weight:600;
+}
+
+.range-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.range-buttons button{
+    padding:8px 14px;
+    border-radius:20px;
+    border:none;
+    background:#f3f4f6;
+    cursor:pointer;
+}
+
+.range-buttons .active{
+    border:2px solid #333;
+    background:white;
+}
+
+/* RIGHT TRADE CARD */
+.trade-card{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    height:fit-content;
+}
+
+.trade-tabs{
+    display:flex;
+    margin:15px 0;
+}
+
+.tab{
+    flex:1;
+    padding:12px;
+    border:none;
+    background:#f3f4f6;
+    cursor:pointer;
+    font-weight:700;
+}
+
+.tab.active{
+    background:white;
+    border-bottom:3px solid #00b386;
+}
+
+/* ORDER TYPE */
+.order-type{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.pill{
+    border:none;
+    padding:8px 14px;
+    border-radius:20px;
+    background:#f3f4f6;
+    cursor:pointer;
+}
+
+.pill.active{
+    background:white;
+    border:1px solid #ddd;
+}
+
+/* INPUTS */
+.input-group{
+    margin-bottom:15px;
+}
+
+.input-group label{
+    font-size:13px;
+    color:#666;
+}
+
+.input-group input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ddd;
+}
+
+/* BALANCE */
+.balance-row{
+    display:flex;
+    justify-content:space-between;
+    margin:20px 0;
+    font-size:14px;
+    color:#666;
+}
+
+/* BIG BUY BUTTON */
+.buy-big{
+    width:100%;
+    padding:16px;
+    background:#00b386;
+    color:white;
+    border:none;
+    border-radius:14px;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+}

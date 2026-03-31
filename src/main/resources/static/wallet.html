@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wallet</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+            margin: 0;
+        }
+
+        /* HEADER */
+        .header {
+            padding: 15px 30px;
+            background: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* CARD */
+        .card {
+            width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .balance {
+            font-size: 40px;
+            margin: 20px 0;
+            color: #00b386;
+        }
+
+        /* BUTTONS */
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .add {
+            background: #00b386;
+            color: white;
+        }
+
+        .withdraw {
+            background: #ff4d4f;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1 onclick="gotToHome()"> 💰 Stock </h1>
+
+    <h1> 💰 Wallet</h1>
+</div>
+
+<div class="card">
+
+    <h3>Current Balance</h3>
+
+    <div id="balance" class="balance">₹ 0</div>
+
+    <button class="btn add" onclick="location.href='add-balance.html'">
+        Add Balance
+    </button>
+
+    <button class="btn withdraw" onclick="withdrawMoney()">
+        Withdraw Balance
+    </button>
+
+</div>
+
+
+<script>
+
+    /* LOAD BALANCE */
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+        document.getElementById("balance")
+            .innerText = "₹ " + safeMoney(user.wallet).toLocaleString();
+    }
+
+
+    /* WITHDRAW */
+    function withdrawMoney() {
+
+        const amount = prompt("Enter amount to withdraw");
+
+        if (!amount || amount <= 0)
+            return alert("Invalid amount");
+
+        if (amount > user.wallet)
+            return alert("Insufficient balance");
+
+        user.wallet -= Number(amount);
+
+        localStorage.setItem("user", JSON.stringify(user));
+
+        alert("Withdraw successful");
+
+        location.reload();
+    }
+
+    function gotToHome() {
+        location.href = "newindex.html";
+    }
+
+</script>
+
+</body>
+
+</html>

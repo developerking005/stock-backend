@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Balance</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+            margin: 0;
+        }
+
+        /* HEADER */
+        .header {
+            padding: 15px 30px;
+            background: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* CARD */
+        .card {
+            width: 420px;
+            margin: 50px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* PAYMENT BOX */
+        .method {
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+
+        .method h4 {
+            margin: 0 0 8px 0;
+        }
+
+        /* INPUTS */
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* BUTTON */
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 10px;
+            background: #00b386;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #009973;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">Add Balance</div>
+
+<div class="card">
+
+    <h3>Select Payment Method</h3>
+
+    <div class="method">
+        <h4>UPI Transfer</h4>
+        <p><b>UPI ID:</b> groww@upi</p>
+    </div>
+
+    <div class="method">
+        <h4>Scan QR</h4>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=groww@upi" width="150">
+    </div>
+
+    <div class="method">
+        <h4>Bank Transfer</h4>
+        <p>Account: 1234567890</p>
+        <p>IFSC: HDFC000123</p>
+        <p>Name: Groww Pvt Ltd</p>
+    </div>
+
+    <hr>
+
+    <h3>Payment Details</h3>
+
+    <input id="amount" type="number" placeholder="Enter Amount">
+
+    <input id="utr" placeholder="Enter UTR Number">
+
+    <input id="file" type="file">
+
+    <button onclick="submitDeposit()">Submit Payment</button>
+
+</div>
+
+
+<script>
+    async function submitDeposit() {
+        const amount = Number(document.getElementById("amount").value);
+        const utr = document.getElementById("utr").value;
+        const file = document.getElementById("file").files[0];
+
+        if (!amount || amount <= 0)
+            return alert("Enter valid amount");
+
+        if (!utr)
+            return alert("Enter UTR number");
+
+        if (!file)
+            return alert("Upload screenshot");
+
+        let user = JSON.parse(localStorage.getItem("user"));
+        const token = localStorage.getItem("token");
+
+        if (!user || !token) {
+            alert("Session expired. Login again.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        /* ---------- LOCAL UPDATE ---------- */
+        user.wallet = safeMoney(user.wallet) + amount;
+        localStorage.setItem("user", JSON.stringify(user));
+
+        /* ---------- BACKEND UPDATE ---------- */
+
+        try {
+
+            const res = await fetch(
+                "http://localhost:8080/api/user/wallet/update",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                    },
+                    body: JSON.stringify({
+                        amount: amount
+                    })
+                });
+
+            if (!res.ok) {
+                throw new Error("Backend update failed");
+            }
+
+            const data = await res.json();
+
+            console.log("Updated wallet:", data);
+
+            alert("Payment submitted successfully ✅");
+
+            window.location.href = "wallet.html";
+
+        } catch (err) {
+
+            console.error(err);
+            alert("Payment saved locally but backend failed");
+        }
+    }
+
+</script>
+
+</body>
+
+</html>

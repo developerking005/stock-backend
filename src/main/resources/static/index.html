@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="header">
+
+    <!-- LEFT -->
+    <div class="header-left">
+
+        <div class="logo-circle"></div>
+
+        <div class="menu">
+            <span class="menu-active">Stocks</span>
+            <span>F&O</span>
+            <span>Mutual Funds</span>
+        </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="header-right">
+        <div class="wallet-box">
+            ₹ <span id="walletAmount" onclick="goToWallet()">0</span>
+        </div>
+
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input placeholder="Search Groww...">
+            <span class="shortcut">⌘K</span>
+        </div>
+
+        <div class="bell">🔔</div>
+
+        <div class="profile" onclick="toggleProfile()">A</div>
+
+    </div>
+
+</header>
+
+<!-- MARKET STRIP -->
+<section class="market-strip">
+    <span>NIFTY 25,819 <b class="green">+0.37%</b></span>
+    <span>SENSEX 83,734 <b class="green">+0.34%</b></span>
+    <span>BANKNIFTY 61,550 <b class="green">+0.62%</b></span>
+    <span>MIDCPNIFTY 13,729 <b class="green">+0.48%</b></span>
+</section>
+
+<!-- MAIN -->
+<div class="container">
+
+    <!-- LEFT CONTENT -->
+    <div class="left">
+
+        <!-- MOST BOUGHT -->
+        <div class="card">
+            <h3>Most bought stocks</h3>
+
+            <div class="stock-grid">
+
+                <div class="stock-box" data-name="Godfrey Phillips" data-price="2477">
+                    <h4>Godfrey Phillips</h4>
+                    <p>₹2,477</p>
+                    <span class="green">+19.9%</span>
+                </div>
+
+                <div class="stock-box" data-name="TATA SILV" data-price="22.7">
+                    <h4>TATA SILV</h4>
+                    <p>₹22.7</p>
+                    <span class="green">+1.8%</span>
+                </div>
+
+                <div class="stock-box" data-name="TATA GOLD" data-price="14.6">
+                    <h4>TATA GOLD</h4>
+                    <p>₹14.6</p>
+                    <span class="red">-0.07%</span>
+                </div>
+
+                <div class="stock-box" data-name="Newgen Software" data-price="531">
+                    <h4>Newgen Software</h4>
+                    <p>₹531</p>
+                    <span class="green">+0.7%</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MOST TRADED MTF -->
+        <div class="card">
+            <h3>Most traded stocks in MTF</h3>
+
+            <div class="stock-grid">
+
+                <div class="stock-box" onclick="goToStockPage()">
+                    <h4>Godfrey Phillips</h4>
+                    <p>₹2477</p>
+                    <span class="green">+19.94%</span>
+                </div>
+
+                <div class="stock-box" onclick="goToStockPage()">
+                    <h4>Newgen Software</h4>
+                    <p>₹531</p>
+                    <span class="green">+0.77%</span>
+                </div>
+
+                <div class="stock-box" onclick="goToStockPage()">
+                    <h4>Waaree Energies</h4>
+                    <p>₹2963</p>
+                    <span class="red">-2.93%</span>
+                </div>
+
+                <div class="stock-box" onclick="goToStockPage()">
+                    <h4>Tata Steel</h4>
+                    <p>₹209</p>
+                    <span class="green">+2.93%</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TOP INTRADAY -->
+        <div class="card">
+            <h3>Top intraday stocks</h3>
+
+            <div class="stock-grid">
+
+                <div class="stock-box">
+                    <h4>Godfrey Phillips</h4>
+                    <p>₹2477</p>
+                    <span class="green">+19.94%</span>
+                </div>
+
+                <div class="stock-box">
+                    <h4>Newgen Software</h4>
+                    <p>₹531</p>
+                    <span class="green">+0.77%</span>
+                </div>
+
+                <div class="stock-box">
+                    <h4>Engineers India</h4>
+                    <p>₹214</p>
+                    <span class="red">-0.29%</span>
+                </div>
+
+                <div class="stock-box">
+                    <h4>Hindustan Copper</h4>
+                    <p>₹569</p>
+                    <span class="green">+3.63%</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TOP MOVERS -->
+        <div class="card">
+            <h3>Top movers today</h3>
+
+            <table>
+                <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Price</th>
+                    <th>Change</th>
+                    <th>Volume</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>Kwality Walls</td>
+                    <td>₹29.33</td>
+                    <td class="green">+4.9%</td>
+                    <td>9,05,81,096</td>
+                </tr>
+
+                <tr>
+                    <td>HDFC Life</td>
+                    <td>₹729</td>
+                    <td class="green">+3.3%</td>
+                    <td>49,74,855</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- RIGHT CONTENT -->
+    <div class="right">
+
+        <div class="card">
+            <h3>Your investments</h3>
+            <p class="muted">You haven't invested yet</p>
+        </div>
+
+        <div class="card">
+            <h3>Products & Tools</h3>
+
+            <div class="tool-row">
+                <span>IPO</span>
+                <span class="green">3 Open</span>
+            </div>
+
+            <div class="tool-row">
+                <span>Bonds</span>
+                <span class="green">1 Open</span>
+            </div>
+
+            <div class="tool-row">
+                <span>ETF Screener</span>
+            </div>
+
+            <div class="tool-row">
+                <span>Intraday Screener</span>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <h3>Trading Screens</h3>
+
+            <div class="screen-row">
+                <span class="tag bullish">Bullish</span>
+                <p>Resistance breakouts</p>
+            </div>
+
+            <div class="screen-row">
+                <span class="tag bullish">Bullish</span>
+                <p>MACD above signal line</p>
+            </div>
+
+            <div class="screen-row">
+                <span class="tag bearish">Bearish</span>
+                <p>RSI overbought</p>
+            </div>
+
+            <div class="screen-row">
+                <span class="tag bullish">Bullish</span>
+                <p>RSI oversold</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Profile Pannel  -->
+
+<div id="profilePanel" class="profile-panel">
+
+    <h3 id="pName">Name</h3>
+    <p id="pPhone">Phone</p>
+    <p id="pDate">Joined</p>
+    <p>Wallet ₹ <span id="pWallet">0</span></p>
+
+    <button onclick="logout()">Logout</button>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+
+</html>
